@@ -1,0 +1,23 @@
+* {
+    box-sizing: border-box;
+
+}
+body {
+    margin:0;
+    overflow: hidden;
+}
+
+.container {
+    background-color: #445E93;
+    height:100vh;
+}
+
+.wrapper {
+    width:480px;
+    margin: 0 auto;
+}
+
+.window {
+    position:fixed;
+
+}
