@@ -4,13 +4,15 @@ import Background from './Background';
 
 function Window() {
 
-    const snowflakes = [];
-    const amountSnowFlakes = 350;
+    // const snowflakes = [];
+    const amountSnowFlakes = 500;
 
     const defaultCategory = 0x0001,
         backGroundCategory = 0x0002;
     const width = 400, height = 700;
     const filterStyle = { filter: 'url(#static-filter)' }
+    let requestId;
+
 
     const containerRef = React.useRef();
     const filterRef = React.useRef();
@@ -38,32 +40,60 @@ function Window() {
             }
         });
 
+        const snowflakeInterval = 100;
+        let lastSnowflakeTime = 0;
 
-        // front 눈 생성 부분
-        for (let i = 0; i < amountSnowFlakes; i++) {
-            const x = Math.random() * width;
-            const y = (Math.random() * height * 3) - height * 6;
-            const radius = 15
+        const createSnowFlake = (time) => {
+            if (time - lastSnowflakeTime > snowflakeInterval) {
+                const x = Math.random() * width;
+                const y = -50;
+                const radius = 10;
+                const snowflake = Bodies.circle(x, y, radius, {
+                    restitution: 0,
+                    friction: 0.4,
+                    frictionAir: 0.1,
+                    density: 0.02,
+                    mouseConstraint: false,
+                    label: 'snowflake',
+                    render: {
+                        fillStyle: 'white'
+                    }
+                });
 
-            const snowflake = Bodies.circle(x, y, radius, {
-                restitution: 0,
-                friction: 0.4,
-                frictionAir: 0.03,
-                density: 0.02,
-                mouseConstraint: false,
-                label: 'snowflake',
-                render: {
-                    fillStyle: 'white'
-                }
-            });
-
-            snowflakes.push(snowflake);
+                World.add(engine.world, snowflake)
+                lastSnowflakeTime = time;
+            }
         }
 
         engine.gravity.y = 1;
 
+        // 파티클의 y 값이 height보다 커지면,
+        // 파티클을 {y : 맨 위, x: 랜덤} 하게 생성
+        const removeOffScreenSnowflakes = (time) => {
+            if (time - lastSnowflakeTime > snowflakeInterval) {
+                const snowflakesToRemove = engine.world.bodies.filter(body => {
+                    return body.label === 'snowflake' && body.position.y > height + 300;
+                })
 
-        World.add(engine.world, snowflakes);
+                snowflakesToRemove.forEach(snow => {
+                    const x = Math.random() * width;
+                    const y = -50;
+                    snow.position = { x, y };
+                })
+            }
+        }
+
+        const animate = (time) => {
+            createSnowFlake(time);
+            removeOffScreenSnowflakes(time);
+
+            requestId = requestAnimationFrame(animate);
+        }
+
+        requestId = requestAnimationFrame(animate);
+
+
+        
 
         const countSnowflakes = () => {
             let snowCount = 0;
@@ -75,20 +105,6 @@ function Window() {
 
             return snowCount;
         }
-
-
-        // 파티클의 y 값이 height보다 커지면,
-        // 파티클을 {y : 맨 위, x: 랜덤} 하게 생성
-        Events.on(engine, 'beforeUpdate', () => {
-            for (const snowflake of snowflakes) {
-                if (snowflake.position.y > height + 50) {
-                    Matter.Body.setPosition(snowflake, { x: Math.random() * (width - 100) + 50, y: -50 })
-                } else if (snowflake.position.y < height - 300) {
-                    const forceX = 0.001 * (Math.random() > 0.5 ? 1 : -1);
-                    Matter.Body.applyForce(snowflake, snowflake.position, { x: forceX, y: 0 })
-                }
-            }
-        })
 
         const floor = Bodies.rectangle(300, 700, 600, 200, {
             isStatic: true,
@@ -201,8 +217,8 @@ function Window() {
             console.log(e.mouse.position)
             const queryRegion = { min: { x: 0, y: 400 }, max: { x: 400, y: 600 } }
 
-            const objects = Query.region(Matter.Composite.allBodies(engine.world), queryRegion).filter(t => t.label ==='snowflake')
-            
+            const objects = Query.region(Matter.Composite.allBodies(engine.world), queryRegion).filter(t => t.label === 'snowflake')
+
         })
 
 
@@ -218,7 +234,7 @@ function Window() {
             Render.stop(render);
             World.clear(engine.world);
             Engine.clear(engine);
-
+            cancelAnimationFrame(requestId);
         }
     }, [])
 

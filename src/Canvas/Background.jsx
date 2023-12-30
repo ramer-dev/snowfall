@@ -14,10 +14,10 @@ function Background() {
             count: 0
         },
         near: {
-            count: 100
+            count: 50
         },
         far: {
-            count: 350
+            count: 250
         }
     }
 
