@@ -36,3 +36,27 @@
     transform: rotate(360deg);
   }
 }
+
+
+
+.container {
+  background-color: #445E93;
+  height:100vh;
+}
+
+.wrapper {
+  width:480px;
+  margin: 0 auto;
+  position:relative;
+}
+
+#window {
+ position:absolute;
+ left:0; 
+}
+
+#background {
+  position:absolute;
+  left:0; 
+
+}

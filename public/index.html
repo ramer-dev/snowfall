@@ -3,8 +3,9 @@
   <head>
     <meta charset="utf-8" />
     <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no,
+    maximum-scale=1.0, minimum-scale=1.0"/>
     <meta
       name="description"
       content="Web site created using create-react-app"
@@ -39,5 +40,23 @@
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
+    <svg xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <filter id="particles-filter">
+          <feGaussianBlur in="SourceGraphic" stdDeviation="5" result="blur" />
+          <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 15 -4" result="goo" />
+        </filter>
+      </defs>
+    </svg>
+  
+    <svg xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <filter id="static-filter">
+          <feGaussianBlur in="SourceGraphic" stdDeviation="6" result="blur" />
+          <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 15 -6" result="goo" />
+          <feComposite in="SourceGraphic" in2="goo" operator="atop" />
+        </filter>
+      </defs>
+    </svg>
   </body>
 </html>

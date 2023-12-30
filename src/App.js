@@ -6,8 +6,8 @@ function App() {
   return (
     <div className="App">
       <div className='container'>
-        <div class='wrapper'>
-          <img class='window' src='#' alt='window BG'/>
+        <div className='wrapper'>
+          <img className='window' src='#' alt='window BG'/>
           <Window/>
         </div>
 

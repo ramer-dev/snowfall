@@ -17,17 +17,3 @@ code {
   box-sizing: border-box;
 
 }
-.container {
-  background-color: #445E93;
-  height:100vh;
-}
-
-.wrapper {
-  width:480px;
-  margin: 0 auto;
-}
-
-.window {
-  position:fixed;
-
-}
