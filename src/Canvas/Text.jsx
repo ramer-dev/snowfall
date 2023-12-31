@@ -11,7 +11,8 @@ function Text() {
         encoded = ''
     }
     return (
-        <div className="Text">
+        <div className="text-box">
+            <h2>2024</h2>
             <h1>HAPPY NEW YEAR</h1>
             <h3>{encoded}</h3>
         </div>

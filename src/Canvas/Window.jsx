@@ -2,15 +2,19 @@ import React, { useEffect } from 'react'
 import Matter, { } from 'matter-js'
 import Background from './Background';
 import Text from './Text';
+import Share from '../Modal/Share';
+
+import { ReactComponent as ShareIcon } from '../Image/ic_share.svg'
+
 
 function Window() {
+    const [isOpen, setIsOpen] = React.useState(false);
+
+    const width = window.innerWidth, height = window.innerHeight;
 
     // const snowflakes = [];
-    const amountSnowFlakes = 2500;
+    const amountSnowFlakes = 3300 / (1920 / width);
 
-    const defaultCategory = 0x0001,
-        backGroundCategory = 0x0002;
-    const width = window.innerWidth, height = window.innerHeight;
     const filterStyle = { filter: 'url(#static-filter)' }
     let requestId;
 
@@ -27,20 +31,10 @@ function Window() {
 
     useEffect(() => {
 
-        // _requestAnimationFrame =
-        // window.requestAnimationFrame ||
-        // window.webkitRequestAnimationFrame ||
-        // window.mozRequestAnimationFrame ||
-        // window.oRequestAnimationFrame ||
-        // window.msRequestAnimationFrame ||
-        // function (callback) {
-        //     window.setTimeout(callback, 1000 / 60);
-        // };
-
         let { Engine, Render, World, Body, Bodies, Events, Runner, Mouse, MouseConstraint, Query } = Matter;
         let engine = Engine.create({
-            enableSleeping:true,
-            constraintIterations:1,
+            enableSleeping: true,
+            constraintIterations: 1,
         });
 
         let render = Render.create({
@@ -63,23 +57,19 @@ function Window() {
             if (time - lastSnowflakeTime > snowflakeInterval && countSnowflakes() < amountSnowFlakes) {
                 const x = Math.random() * width;
                 const y = -50;
-                const radius = Math.random() * (10 - 5) + 5;
+                const radius = Math.random() * (15 - 7) + 7;
                 const snowflake = Bodies.circle(x, y, radius, {
                     restitution: 0,
-                    friction: 0.01,
+                    friction: 0.001,
                     frictionAir: 0.1,
-                    density: 0.001,
                     label: 'snowflake',
                     render: {
                         fillStyle: 'white',
-                        opacity:1,
+                        opacity: 1,
                     }
                 });
 
                 World.add(engine.world, snowflake)
-                // setTimeout(() => {
-                //     Matter.Sleeping.set(snowflake, true)
-                // }, 10000)
                 lastSnowflakeTime = time;
             }
         }
@@ -123,7 +113,7 @@ function Window() {
             return snowCount;
         }
 
-        const floor = Bodies.rectangle(width/2, height, width, 70, {
+        const floor = Bodies.rectangle(width / 2, height + 35, width, 70, {
             isStatic: true,
 
             render: {
@@ -131,13 +121,13 @@ function Window() {
             }
         })
 
-        const leftSideWall = Bodies.rectangle(0, 300, 25, 2000, {
+        const leftSideWall = Bodies.rectangle(-12, 300, 25, 2000, {
             isStatic: true,
             render: {
                 // visible: false,
             }
         })
-        const rightSideWall = Bodies.rectangle(width, 300, 25, 2000, {
+        const rightSideWall = Bodies.rectangle(width + 12, 300, 25, 2000, {
             isStatic: true,
             render: {
                 // visible: false,
@@ -162,13 +152,13 @@ function Window() {
         Events.on(mouseConstraint, 'mousedown', e => {
             const x = e.mouse.position.x;
             const y = e.mouse.position.y;
-            const eraser = Bodies.rectangle(x, y, 10, 40, {
+            const eraser = Bodies.rectangle(x, y, 10, 60, {
                 render: {
-                    fillStyle: '#00FF00',
+                    fillStyle: '#f5b237',
                 },
                 label: 'eraser',
                 // isStatic: true,
-                isSleeping:false,
+                isSleeping: false,
             })
 
             // 좌클릭 우클릭 동시 눌렀을때의 버그 발생 방지
@@ -180,7 +170,7 @@ function Window() {
             World.add(engine.world, eraser);
         })
 
-        Events.on(engine, 'collisionActive', e => {
+        Events.on(engine, 'collisionActive' || 'collistionActive', e => {
             const pairs = e.pairs;
 
             pairs.forEach((pair) => {
@@ -188,7 +178,6 @@ function Window() {
                 if ((pair.bodyA.label === 'eraser' && pair.bodyB.label === 'snowflake') ||
                     (pair.bodyA.label === 'snowflake' && pair.bodyB.label === 'eraser')
                 ) {
-                    console.log(pair)
 
                     const snowflake = pair.bodyA.label === 'snowflake' ? pair.bodyA : pair.bodyB
                     // if (snowflake.area > 300) {
@@ -204,7 +193,6 @@ function Window() {
         })
 
         Events.on(mouseConstraint, 'mouseup', e => {
-            console.log(eraserRef.current)
             if (eraserRef.current) {
                 World.remove(engine.world, eraserRef.current)
             }
@@ -256,7 +244,6 @@ function Window() {
         //     calculateAngle();
         // }, 3000)
         Events.on(mouseConstraint, 'mousedown', (e) => {
-            console.log(e.mouse.position)
             const queryRegion = { min: { x: 0, y: 400 }, max: { x: 400, y: 600 } }
 
             const objects = Query.region(Matter.Composite.allBodies(engine.world), queryRegion).filter(t => t.label === 'snowflake')
@@ -281,20 +268,25 @@ function Window() {
     }, [])
 
 
-    const handleOnClick = (e) => {
-        console.log(snowflakeCountRef.current)
+    const handleOpen = (e) => {
+        setIsOpen(true);
     }
 
     return (
         <div>
             <div className='wrapper'>
                 <Background />
+                <Text />
                 <div ref={filterRef} style={filterStyle}>
                     <canvas id='window' ref={canvasRef} />
                 </div>
-                <Text />
             </div>
-            <button onClick={handleOnClick}>zz</button>
+            <Share isOpen={isOpen} setIsOpen={setIsOpen} />
+
+
+            <div onClick={handleOpen} className='share-btn'>
+                <ShareIcon fill={'wheat'} width={20} height='100%'/>
+            </div>
         </div>
     )
 }

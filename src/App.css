@@ -2,71 +2,64 @@
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-
-
 .container {
   background-color: #000000;
-  height:100vh;
+  height: 100vh;
 }
 
 .wrapper {
   margin: 0 auto;
-  position:relative;
+  position: relative;
 }
 
 #window {
- position:absolute;
- left: 50%;
- transform: translate(-50%, 0);
-}
-
-#background {
-  position:absolute;
-  margin:0 auto;
+  position: absolute;
   left: 50%;
   transform: translate(-50%, 0);
 }
 
-.Text {
-  position:absolute;
-  margin:0 auto;
-  height:100vh;
+#background {
+  position: absolute;
+  margin: 0 auto;
   left: 50%;
-  transform: translate(-50%, 45%);
+  transform: translate(-50%, 0);
+}
+
+.text-box {
+  position: fixed;
+  margin: 0 auto;
+  left: 50%;
+  top:50%;
+  transform: translate(-50%, -50%);
   user-select: none;
+}
+
+h1 {
+  color: #f5deb3;
+  font-family: 'Noto Sans KR';
+  margin:0;
+  font-size:3rem;
+  font-weight: 200;
+}
+
+h2{
+  color: #fff2db;
+  font-family: 'Noto Sans KR';
+  margin:0;
+  font-size:3rem;
+  font-weight: 800;
+}
+
+h3 {
+  width:100%;
+  color: #ecbe69;
+  font-family: 'Noto Sans KR';
+  font-weight: 600;
+  width:210px;
+}
+
+.share-btn {
+  position:fixed;
+  top:20px;
+  right:20px;
 }
