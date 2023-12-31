@@ -17,7 +17,7 @@ function Background() {
             count: 50
         },
         far: {
-            count: 250
+            count: 100
         }
     }
 

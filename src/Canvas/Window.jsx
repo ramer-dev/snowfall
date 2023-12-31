@@ -6,7 +6,7 @@ import Text from './Text';
 function Window() {
 
     // const snowflakes = [];
-    const amountSnowFlakes = 1200;
+    const amountSnowFlakes = 2500;
 
     const defaultCategory = 0x0001,
         backGroundCategory = 0x0002;
@@ -26,8 +26,22 @@ function Window() {
 
 
     useEffect(() => {
+
+        // _requestAnimationFrame =
+        // window.requestAnimationFrame ||
+        // window.webkitRequestAnimationFrame ||
+        // window.mozRequestAnimationFrame ||
+        // window.oRequestAnimationFrame ||
+        // window.msRequestAnimationFrame ||
+        // function (callback) {
+        //     window.setTimeout(callback, 1000 / 60);
+        // };
+
         let { Engine, Render, World, Body, Bodies, Events, Runner, Mouse, MouseConstraint, Query } = Matter;
-        let engine = Engine.create();
+        let engine = Engine.create({
+            enableSleeping:true,
+            constraintIterations:1,
+        });
 
         let render = Render.create({
             element: containerRef.current,
@@ -37,7 +51,8 @@ function Window() {
                 width,
                 height,
                 background: 'transparent',
-                wireframes: false
+                wireframes: false,
+                showSleeping: false,
             }
         });
 
@@ -48,20 +63,23 @@ function Window() {
             if (time - lastSnowflakeTime > snowflakeInterval && countSnowflakes() < amountSnowFlakes) {
                 const x = Math.random() * width;
                 const y = -50;
-                const radius = 10;
+                const radius = Math.random() * (10 - 5) + 5;
                 const snowflake = Bodies.circle(x, y, radius, {
                     restitution: 0,
-                    friction: 0.4,
+                    friction: 0.01,
                     frictionAir: 0.1,
                     density: 0.001,
-                    mouseConstraint: false,
                     label: 'snowflake',
                     render: {
-                        fillStyle: 'white'
+                        fillStyle: 'white',
+                        opacity:1,
                     }
                 });
 
                 World.add(engine.world, snowflake)
+                // setTimeout(() => {
+                //     Matter.Sleeping.set(snowflake, true)
+                // }, 10000)
                 lastSnowflakeTime = time;
             }
         }
@@ -92,8 +110,6 @@ function Window() {
         }
 
         requestId = requestAnimationFrame(animate);
-
-
 
 
         const countSnowflakes = () => {
@@ -151,8 +167,8 @@ function Window() {
                     fillStyle: '#00FF00',
                 },
                 label: 'eraser',
-                isStatic: true,
-
+                // isStatic: true,
+                isSleeping:false,
             })
 
             // 좌클릭 우클릭 동시 눌렀을때의 버그 발생 방지
@@ -168,11 +184,13 @@ function Window() {
             const pairs = e.pairs;
 
             pairs.forEach((pair) => {
+
                 if ((pair.bodyA.label === 'eraser' && pair.bodyB.label === 'snowflake') ||
                     (pair.bodyA.label === 'snowflake' && pair.bodyB.label === 'eraser')
                 ) {
-                    const snowflake = pair.bodyA.label === 'snowflake' ? pair.bodyA : pair.bodyB
+                    console.log(pair)
 
+                    const snowflake = pair.bodyA.label === 'snowflake' ? pair.bodyA : pair.bodyB
                     // if (snowflake.area > 300) {
                     //     Body.scale(snowflake, 0.85, 0.85)
                     //     // snowflake.circleRadius = newRadius;
