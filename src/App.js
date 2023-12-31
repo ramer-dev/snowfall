@@ -8,11 +8,11 @@ function App() {
       <div className='container'>
         <div className='wrapper'>
           {/* <img className='window' src='#' alt='window BG'/> */}
-          <Window/>
+          <Window />
         </div>
 
       </div>
-    </div>
+    </div >
   );
 }
 

@@ -1,0 +1,55 @@
+.backdraw {
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, .5);
+}
+
+.modal {
+    position: absolute;
+    border-radius: 5px;
+    width: 300px;
+    height: 200px;
+    left: 50%;
+    top: 50%;
+    margin: 0 auto;
+    transform: translate(-50%, 100%);
+    background-color: rgb(255, 242, 186);
+}
+
+.modal-div {
+    margin: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.modal-confirm {
+    background: rgba(240, 210, 100, 1);
+    background: -webkit-gradient(linear, 0 0, 0 100%, from(rgba(240, 210, 100, 1)), to(rgba(229, 201, 96, 1)));
+    background: -webkit-linear-gradient(rgba(240, 210, 100, 1) 0%, rgba(229, 201, 96, 1) 100%);
+    background: -moz-linear-gradient(rgba(240, 210, 100, 1) 0%, rgba(229, 201, 96, 1) 100%);
+    background: -o-linear-gradient(rgba(240, 210, 100, 1) 0%, rgba(229, 201, 96, 1) 100%);
+    background: linear-gradient(rgba(240, 210, 100, 1) 0%, rgba(229, 201, 96, 1) 100%);
+
+    margin: 20px 80px;
+    padding: 8px 18px;
+    font-size: 14px;
+    border-radius: 5px;
+    color: white;
+    display: inline-block;
+    position: relative;
+    border: 1px solid rgba(0, 0, 0, 0.21);
+    border-bottom: 4px solid rgba(0, 0, 0, 0.21);
+    border-radius: 4px;
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.15);
+    outline: none;
+    transition:0.2s ease;
+}
+
+.modal-confirm:hover {
+    background: rgb(202, 178, 89);
+}
+
+h4 {
+    font-weight : 400;
+}
