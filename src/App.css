@@ -45,18 +45,28 @@
 }
 
 .wrapper {
-  width:480px;
   margin: 0 auto;
   position:relative;
 }
 
 #window {
  position:absolute;
- left:0; 
+ left: 50%;
+ transform: translate(-50%, 0);
 }
 
 #background {
   position:absolute;
-  left:0; 
+  margin:0 auto;
+  left: 50%;
+  transform: translate(-50%, 0);
+}
 
+.Text {
+  position:absolute;
+  margin:0 auto;
+  height:100vh;
+  left: 50%;
+  transform: translate(-50%, 45%);
+  user-select: none;
 }

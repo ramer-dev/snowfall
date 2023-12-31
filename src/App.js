@@ -7,7 +7,7 @@ function App() {
     <div className="App">
       <div className='container'>
         <div className='wrapper'>
-          <img className='window' src='#' alt='window BG'/>
+          {/* <img className='window' src='#' alt='window BG'/> */}
           <Window/>
         </div>
 

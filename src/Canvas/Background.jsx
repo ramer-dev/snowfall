@@ -2,8 +2,8 @@ import React, { useEffect } from 'react'
 
 
 function Background() {
-    const width = 400;
-    const height = 600;
+    const width = window.innerWidth;
+    const height = window.innerHeight;
     let farParticle = [];
     let nearParticle = [];
     let particleList = [];
@@ -14,10 +14,10 @@ function Background() {
             count: 0
         },
         near: {
-            count: 50
+            count: width / 20
         },
         far: {
-            count: 250
+            count: width / 10
         }
     }
 
@@ -37,7 +37,7 @@ function Background() {
         class Particle {
             constructor(areaValue, alphaValue, fallingSpeed, amplitude, isBounceable = false) {
                 this.area = areaValue;
-                this.x = Math.random() * width;
+                this.x = Math.random() * width * 1.1 - (width*0.1);
                 this.y = Math.random() * height * 1.5;
                 this.amplitude = amplitude;
                 this.origin = {
