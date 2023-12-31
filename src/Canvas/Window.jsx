@@ -289,10 +289,10 @@ function Window() {
         <div>
             <div className='wrapper'>
                 <Background />
+                <Text />
                 <div ref={filterRef} style={filterStyle}>
                     <canvas id='window' ref={canvasRef} />
                 </div>
-                <Text />
             </div>
             <button onClick={handleOnClick}>zz</button>
         </div>
