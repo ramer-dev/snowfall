@@ -10,7 +10,7 @@ function Window() {
 
     const defaultCategory = 0x0001,
         backGroundCategory = 0x0002;
-    const width = 400, height = 700;
+    const width = window.innerWidth, height = window.innerHeight;
     const filterStyle = { filter: 'url(#static-filter)' }
     let requestId;
 
@@ -56,7 +56,7 @@ function Window() {
             }
         });
 
-        const snowflakeInterval = 100;
+        const snowflakeInterval = 20000 / width;
         let lastSnowflakeTime = 0;
 
         const createSnowFlake = (time) => {
@@ -123,24 +123,24 @@ function Window() {
             return snowCount;
         }
 
-        const floor = Bodies.rectangle(300, 700, 600, 200, {
+        const floor = Bodies.rectangle(width/2, height, width, 70, {
             isStatic: true,
 
             render: {
-                visible: false,
+                // visible: false,
             }
         })
 
-        const leftSideWall = Bodies.rectangle(0, 300, 25, 600, {
+        const leftSideWall = Bodies.rectangle(0, 300, 25, 2000, {
             isStatic: true,
             render: {
-                visible: false,
+                // visible: false,
             }
         })
-        const rightSideWall = Bodies.rectangle(400, 300, 25, 600, {
+        const rightSideWall = Bodies.rectangle(width, 300, 25, 2000, {
             isStatic: true,
             render: {
-                visible: false,
+                // visible: false,
             }
         })
 
