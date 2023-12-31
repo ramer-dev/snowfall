@@ -1,11 +1,12 @@
 import React, { useEffect } from 'react'
 import Matter, { } from 'matter-js'
 import Background from './Background';
+import Text from './Text';
 
 function Window() {
 
     // const snowflakes = [];
-    const amountSnowFlakes = 500;
+    const amountSnowFlakes = 1200;
 
     const defaultCategory = 0x0001,
         backGroundCategory = 0x0002;
@@ -44,7 +45,7 @@ function Window() {
         let lastSnowflakeTime = 0;
 
         const createSnowFlake = (time) => {
-            if (time - lastSnowflakeTime > snowflakeInterval) {
+            if (time - lastSnowflakeTime > snowflakeInterval && countSnowflakes() < amountSnowFlakes) {
                 const x = Math.random() * width;
                 const y = -50;
                 const radius = 10;
@@ -52,7 +53,7 @@ function Window() {
                     restitution: 0,
                     friction: 0.4,
                     frictionAir: 0.1,
-                    density: 0.02,
+                    density: 0.001,
                     mouseConstraint: false,
                     label: 'snowflake',
                     render: {
@@ -93,7 +94,7 @@ function Window() {
         requestId = requestAnimationFrame(animate);
 
 
-        
+
 
         const countSnowflakes = () => {
             let snowCount = 0;
@@ -153,6 +154,12 @@ function Window() {
                 isStatic: true,
 
             })
+
+            // 좌클릭 우클릭 동시 눌렀을때의 버그 발생 방지
+            if (eraserRef.current) {
+                World.remove(engine.world, eraserRef.current)
+            }
+
             eraserRef.current = eraser;
             World.add(engine.world, eraser);
         })
@@ -179,6 +186,7 @@ function Window() {
         })
 
         Events.on(mouseConstraint, 'mouseup', e => {
+            console.log(eraserRef.current)
             if (eraserRef.current) {
                 World.remove(engine.world, eraserRef.current)
             }
@@ -203,8 +211,24 @@ function Window() {
                 const dy = y_ - y;
 
                 const angleRad = Math.atan2(dy, dx);
-                if (eraserRef.current)
-                    Body.setAngle(eraserRef.current, angleRad)
+                if (eraserRef.current) {
+                    // 현재 각도
+                    const currentAngle = eraserRef.current.angle || 0;
+
+                    // console.log(currentAngle * (180/Math.PI))
+
+                    // 트랜지션에 사용할 각도의 변화량 계산 (현재 각도와 새로운 각도 간의 차이)
+                    // 음수 라디안 각도를 처리하여 부드럽게 각도를 변경
+                    let angleChange = angleRad - currentAngle;
+                    if (angleChange > Math.PI) {
+                        angleChange -= 2 * Math.PI;
+                    } else if (angleChange < -Math.PI) {
+                        angleChange += 2 * Math.PI;
+                    }
+
+                    // 트랜지션 적용 (여기서는 0.1초 동안 부드럽게 각도가 변경됩니다. 필요에 따라 조절 가능)
+                    Body.setAngle(eraserRef.current, currentAngle + angleChange * 0.2);
+                }
             }
 
             mousePositionRef.current = { x, y }
@@ -250,6 +274,7 @@ function Window() {
                 <div ref={filterRef} style={filterStyle}>
                     <canvas id='window' ref={canvasRef} />
                 </div>
+                <Text />
             </div>
             <button onClick={handleOnClick}>zz</button>
         </div>
