@@ -57,7 +57,12 @@ function Window() {
             if (time - lastSnowflakeTime > snowflakeInterval && countSnowflakes() < amountSnowFlakes) {
                 const x = Math.random() * width;
                 const y = -50;
-                const radius = Math.random() * (15 - 7) + 7;
+                const slope = (12 - 8) / (1920 - 280);
+                const intercept = 8 - slope * 280;
+                const dynamicMaxRadius = slope * width + intercept;
+                const minRadius = 8;
+                const maxRadius = Math.min(dynamicMaxRadius, 12);
+                const radius = width >= 1600 ? Math.random() * (25 - 10) + 10 :  Math.random() * (maxRadius - minRadius) + minRadius;
                 const snowflake = Bodies.circle(x, y, radius, {
                     restitution: 0,
                     friction: 0.001,
@@ -285,7 +290,7 @@ function Window() {
 
 
             <div onClick={handleOpen} className='share-btn'>
-                <ShareIcon fill={'wheat'} width={20} height='100%'/>
+                <ShareIcon fill={'wheat'} width={20} height='100%' />
             </div>
         </div>
     )
