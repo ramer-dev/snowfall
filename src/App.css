@@ -25,13 +25,12 @@
   transform: translate(-50%, 0);
 }
 
-.Text {
+.text-box {
   position: fixed;
   margin: 0 auto;
-  height: 100vh;
   left: 50%;
   top:50%;
-  transform: translate(-50%, -10%);
+  transform: translate(-50%, -50%);
   user-select: none;
 }
 
@@ -43,11 +42,20 @@ h1 {
   font-weight: 200;
 }
 
+h2{
+  color: #fff2db;
+  font-family: 'Noto Sans KR';
+  margin:0;
+  font-size:3rem;
+  font-weight: 800;
+}
+
 h3 {
-  margin:10px;
+  width:100%;
   color: #ecbe69;
   font-family: 'Noto Sans KR';
   font-weight: 600;
+  width:210px;
 }
 
 .share-btn {

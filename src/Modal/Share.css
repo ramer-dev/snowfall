@@ -6,14 +6,14 @@
 }
 
 .modal {
-    position: absolute;
+    position: fixed;
     border-radius: 5px;
-    width: 300px;
+    width: 280px;
     height: 200px;
     left: 50%;
     top: 50%;
     margin: 0 auto;
-    transform: translate(-50%, 100%);
+    transform: translate(-50%, -50%);
     background-color: rgb(255, 242, 186);
 }
 
@@ -31,7 +31,7 @@
     background: -o-linear-gradient(rgba(240, 210, 100, 1) 0%, rgba(229, 201, 96, 1) 100%);
     background: linear-gradient(rgba(240, 210, 100, 1) 0%, rgba(229, 201, 96, 1) 100%);
 
-    margin: 20px 80px;
+    margin: 20px 60px;
     padding: 8px 18px;
     font-size: 14px;
     border-radius: 5px;
