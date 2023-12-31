@@ -7,7 +7,7 @@ function Text() {
     try {
         encoded = decodeURIComponent(escape(atob(name)));
     } catch (error) {
-        console.warning('Invalid decoding Base 64 string')
+        console.warn('Invalid decoding Base 64 string')
         encoded = ''
     }
     return (
