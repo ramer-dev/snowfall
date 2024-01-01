@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import Matter, { Query } from 'matter-js'
+import Matter from 'matter-js'
 import Background from './Background';
 import Text from './Text';
 import Share from '../Modal/Share';
@@ -33,7 +33,7 @@ function Window() {
 
     useEffect(() => {
 
-        const { Engine, Render, World, Body, Bodies, Events, Runner, Mouse, MouseConstraint } = Matter;
+        const { Engine, Render, World, Body, Bodies, Events, Runner, Mouse, MouseConstraint, Query } = Matter;
         const engine = Engine.create({
             enableSleeping: true,
             constraintIterations: 1,
@@ -80,7 +80,7 @@ function Window() {
         // 눈송이를 생성하는 함수
         // time만큼 시간이 지났고, 전체 눈송이의 갯수가 amountSnowFlakes 미만일때 생성한다.
         const createSnowFlake = (time) => {
-            if (time - lastSnowflakeTime > snowflakeInterval && countSnowflakes() < amountSnowFlakes) {
+            if (time - lastSnowflakeTime > snowflakeInterval && checkParticle()) {
                 const x = Math.random() * width;
                 const y = -50;
                 const slope = (12 - 8) / (1920 - 280);
@@ -98,8 +98,8 @@ function Window() {
                         fillStyle: 'white',
                         opacity: 1,
                     },
-                    collisionFilter:{
-                        category:interactionCategory
+                    collisionFilter: {
+                        category: interactionCategory
                     }
                 });
 
@@ -125,12 +125,29 @@ function Window() {
             }
         }
 
+
+        // 파티클 상단부 센서 감지
+        // 상단부에 75개 이상이면 더이상 눈이 안내림
+        const checkParticle = () => {
+            const regionBound = {
+                min: { x: width / 2, y: 0 },
+                max: { x: width, y: 150 }
+            }
+
+            const bodiesInRegion = Query.region(engine.world.bodies, regionBound);
+
+            const particleCount = bodiesInRegion;
+
+            return particleCount.length < 75
+
+        }
+
         // 프레임마다 실행되는 함수.
         // setInterval이 가지고있는 여러 문제점을 해결해준다.
         const animate = (time) => {
+            // checkParticle(time);
             createSnowFlake(time);
             removeOffScreenSnowflakes(time);
-
             requestId = requestAnimationFrame(animate);
         }
         requestId = requestAnimationFrame(animate);
@@ -190,10 +207,10 @@ function Window() {
                     fillStyle: '#f5b237',
                 },
                 label: 'eraser',
-                frictionAir:1,
-                mass:100,
+                frictionAir: 1,
+                mass: 100,
                 isSleeping: false,
-                collisionFilter: { category:  defaultCategory || interactionCategory }
+                collisionFilter: { category: defaultCategory || interactionCategory }
             })
 
             // 좌클릭 우클릭 동시 눌렀을때의 버그 발생 방지
