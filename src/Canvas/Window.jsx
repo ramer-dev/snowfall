@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import Matter from 'matter-js'
+import Matter, { Query } from 'matter-js'
 import Background from './Background';
 import Text from './Text';
 import Share from '../Modal/Share';
@@ -18,6 +18,9 @@ function Window() {
     const filterStyle = { filter: 'url(#static-filter)' }
     let requestId;
 
+    const defaultCategory = 0x0001, // for walls
+        interactionCategory = 0x0002, // snow 
+        effectCategory = 0x0004 // effect 
 
     const containerRef = React.useRef();
     const filterRef = React.useRef();
@@ -53,14 +56,19 @@ function Window() {
         // 지형지물(바닥) 생성
         const floor = Bodies.rectangle(width / 2, height + 35, width, 70, {
             isStatic: true,
+            collisionFilter: { category: defaultCategory }
         })
         // 지형지물(왼쪽 벽) 생성
         const leftSideWall = Bodies.rectangle(-12, 300, 25, 2000, {
             isStatic: true,
+            collisionFilter: { category: defaultCategory }
+
         })
         // 지형지물(오른쪽 벽) 생성
         const rightSideWall = Bodies.rectangle(width + 12, 300, 25, 2000, {
             isStatic: true,
+            collisionFilter: { category: defaultCategory }
+
         })
 
         // 월드에 지형지물 추가
@@ -89,6 +97,9 @@ function Window() {
                     render: {
                         fillStyle: 'white',
                         opacity: 1,
+                    },
+                    collisionFilter:{
+                        category:interactionCategory
                     }
                 });
 
@@ -173,12 +184,16 @@ function Window() {
         // 클릭 했을 때, 클릭한 위치에 지우개 오브젝트 생성
         Events.on(mouseConstraint, 'mousedown', e => {
             const { x, y } = e.mouse.position;
+
             const eraser = Bodies.rectangle(x, y, 10, 60, {
                 render: {
                     fillStyle: '#f5b237',
                 },
                 label: 'eraser',
+                frictionAir:1,
+                mass:100,
                 isSleeping: false,
+                collisionFilter: { category:  defaultCategory || interactionCategory }
             })
 
             // 좌클릭 우클릭 동시 눌렀을때의 버그 발생 방지
@@ -189,6 +204,7 @@ function Window() {
 
             eraserRef.current = eraser;
             World.add(engine.world, eraser);
+            // Matter.Mouse.setElement(mouse, eraserRef.current)
         })
 
         // 마우스 클릭을 뗄 때 
