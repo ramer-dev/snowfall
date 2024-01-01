@@ -10,7 +10,7 @@ function Share({ isOpen, setIsOpen }) {
     }
 
     const encodeToBase64 = (str) => {
-        return btoa(unescape(encodeURIComponent(str)))
+        return btoa(encodeURIComponent(str))
     }
 
     const makeURL = () => {
