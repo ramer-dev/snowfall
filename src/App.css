@@ -63,4 +63,17 @@ h3 {
   position:fixed;
   top:20px;
   right:20px;
+  width:40px;
+  height:40px;
+  border-radius: 5px;
+  border:rgba(139, 112, 62, 0.5) 3px solid;
+  background-color: rgba(212, 196, 165, 0.1);
+}
+
+.share-btn :hover{
+  background-color: rgba(212, 196, 165, 0.5);
+
+}
+.share-btn svg {
+  padding:0 8px;
 }
