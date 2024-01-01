@@ -5,6 +5,7 @@ function Text() {
     const name = urlRef.current.searchParams.get('n');
     let encoded;
     try {
+        if(name)
         encoded = decodeURIComponent((atob(name)));
     } catch (error) {
         console.warn('Invalid decoding Base 64 string')
