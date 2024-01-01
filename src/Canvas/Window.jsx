@@ -167,7 +167,7 @@ function Window() {
 
         // 객체간 충돌 시, 충돌이 유지될 때 발생하는 이벤트
         // 만약 충돌한 객체의 라벨이 eraser와 snowflake일 경우 snowflake 객체를 월드에서 삭제한다.
-        Events.on(engine, 'collisionStart' || 'collisionActive', e => {
+        const onCollision = (e) => {
             const { pairs } = e;
 
             pairs.forEach((pair) => {
@@ -182,6 +182,14 @@ function Window() {
                     snowflakeCountRef.current = countSnowflakes();
                 }
             })
+        }
+        
+        Events.on(engine, 'collisionStart', e => {
+            onCollision(e);
+        })
+
+        Events.on(engine, 'collisionActive', e => {
+            onCollision(e);
         })
 
 
