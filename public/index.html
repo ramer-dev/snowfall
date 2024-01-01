@@ -12,20 +12,9 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;200;400;600;800&display=swap" rel="stylesheet">
   <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo.png" />
-  <!--
-      manifest.json provides metadata used when your web app is installed on a
-      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
-    -->
+ 
   <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-  <!--
-      Notice the use of %PUBLIC_URL% in the tags above.
-      It will be replaced with the URL of the `public` folder during the build.
-      Only files inside the `public` folder can be referenced from the HTML.
-
-      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
-      work correctly both with client-side routing and a non-root public URL.
-      Learn how to configure a non-root public URL by running `npm run build`.
-    -->
+ 
   <title>Happy new year!</title>
 </head>
 
@@ -33,18 +22,18 @@
   <noscript>You need to enable JavaScript to run this app.</noscript>
   <div id="root"></div>
 
-  <svg xmlns="http://www.w3.org/2000/svg">
+  <!-- <svg xmlns="http://www.w3.org/2000/svg">
     <defs>
       <filter id="particles-filter">
         <feGaussianBlur in="SourceGraphic" stdDeviation="5" result="blur" />
         <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 15 -4" result="goo" />
       </filter>
     </defs>
-  </svg>
+  </svg> -->
 
   <svg xmlns="http://www.w3.org/2000/svg">
     <defs>
-      <filter id="static-filter">
+      <filter id="static-filter" x="-50%" width="200%" y="-50%" height="200%">
         <feGaussianBlur in="SourceGraphic" stdDeviation="6" result="blur" />
         <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 15 -6" result="goo" />
         <feComposite in="SourceGraphic" in2="goo" operator="atop" />
