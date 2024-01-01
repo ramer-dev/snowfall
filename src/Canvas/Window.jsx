@@ -87,7 +87,7 @@ function Window() {
                 const intercept = 8 - slope * 280;
                 const dynamicMaxRadius = slope * width + intercept;
                 const minRadius = 8;
-                const maxRadius = Math.min(dynamicMaxRadius, 12);
+                const maxRadius = Math.max(dynamicMaxRadius, 12);
                 const radius = width >= 1600 ? Math.random() * (25 - 10) + 10 : Math.random() * (maxRadius - minRadius) + minRadius;
                 const snowflake = Bodies.circle(x, y, radius, {
                     restitution: 0,
@@ -126,7 +126,7 @@ function Window() {
         }
 
 
-        // 파티클 상단부 센서 감지
+        // 화면 상단부 파티클 센서 
         // 상단부에 75개 이상이면 더이상 눈이 안내림
         const checkParticle = () => {
             const regionBound = {
