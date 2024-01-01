@@ -308,8 +308,8 @@ function Window() {
             <div className='wrapper'>
                 <Background />
                 <Text />
-                <div ref={filterRef} >
-                    <canvas id='window' style={filterStyle} ref={canvasRef} />
+                <div ref={filterRef} style={filterStyle}>
+                    <canvas id='window'  ref={canvasRef} />
                 </div>
             </div>
             <Share isOpen={isOpen} setIsOpen={setIsOpen} />
