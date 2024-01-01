@@ -1,70 +1,23 @@
-# Getting Started with Create React App
+![image](https://github.com/ramer-dev/snowfall/assets/51011193/8eda44d4-9e32-4c48-a962-9ac6f4400564)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# 항해 플러스 코육대 2회 (눈내리기)
+이 프로젝트는 항해 99의 항해 플러스에서 주최한 대회에 참여한 프로젝트입니다.
 
-## Available Scripts
+# 소개
+2023년도를 마치고 2024년도를 맞이하며 저의 곁에 있어준 모든이들에게 감사한 마음을 담아 만들었습니다.   
+화면 우측 상단에 있는 공유버튼을 눌러 소중한 분의 이름, 별명 또는 애칭을 적어주시고 링크를 복사하여 전달해주세요.
 
-In the project directory, you can run:
+## 사용한 기술
+`React` - 공유페이지나 페이지 로딩 등의 장면을 SPA로 구현하기 위해 택하였습니다.   
+`Matter.js` - JS의 Canvas 상에서 간편한 물리엔진 구현을 위해 택하였습니다.
 
-### `npm start`
+## 개발한 내용
+1. 클릭 및 드래그하여 화면을 덮는 눈을 치울 수 있습니다.
+2. 단, 눈은 화면 상단부에 일정 이상 쌓이게되면 더 이상 내리지 않으니 눈이 더이상 내리지 않는다면 화면 위쪽에 있는 눈을 치워주세요.
+3. 소중한 사람들의 이름 또는 별명이 적힌 다 함께 행복할 2024년을 공유해요.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## 프로젝트 회고
+[블로그 링크](https://ramon4096.tistory.com/11)
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+### 배포
+Vercel
