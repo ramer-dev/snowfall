@@ -275,7 +275,7 @@ function Window() {
 
 
             <div onClick={handleOpen} className='share-btn'>
-                <ShareIcon fill={'wheat'} width={20} height='100%' />
+                <ShareIcon fill={'wheat'} width={'100%'} height='100%' />
             </div>
         </div>
     )
